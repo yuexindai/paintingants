@@ -98,14 +98,12 @@ public class CPainting extends Canvas implements MouseListener {
     // initialisation de la matrice des couleurs
     //mCouleurs = new Color[mDimension.width][mDimension.height];
     mCouleurs = new int[mDimension.width][mDimension.height];
-    synchronized (mMutexCouleurs) {
       for (i = 0; i != mDimension.width; i++) {
         for (j = 0; j != mDimension.height; j++) {
           //mCouleurs[i][j] = new Color(mCouleurFond.getRed(), mCouleurFond.getGreen(), mCouleurFond.getBlue());
         	mCouleurs[i][j] = mCouleurFond;
         }
       }
-    }
     
     for(int r=0; r<256; r++){
     	for(int g=0;g<256;g++){
@@ -123,9 +121,7 @@ public class CPainting extends Canvas implements MouseListener {
    ******************************************************************************/
   //public Color getCouleur(int x, int y) {
   public int getCouleur(int x, int y) {
-    synchronized (mMutexCouleurs) {
       return mCouleurs[x][y];
-    }
   }
 
   /******************************************************************************
@@ -159,7 +155,6 @@ public class CPainting extends Canvas implements MouseListener {
   public void init() {
     int i, j;
     mGraphics = getGraphics();
-    synchronized (mMutexCouleurs) {
       mGraphics.clearRect(0, 0, mDimension.width, mDimension.height);
 
       // initialisation de la matrice des couleurs
@@ -170,7 +165,6 @@ public class CPainting extends Canvas implements MouseListener {
           mCouleurs[i][j] = mCouleurFond;
         }
       }
-    }
 
     // initialisation de la matrice de convolution : lissage moyen sur 9
     // cases
